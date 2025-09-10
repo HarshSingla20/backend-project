@@ -3,7 +3,5 @@
     "bracketSpacing": true,
     "tabWidth": 2,
     "trailingCommas": "es5",
-    "semi": true,
-    ""
-    
+    "semi": true
 }
