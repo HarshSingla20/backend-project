@@ -18,6 +18,13 @@ const userSchema = new mongoose.Schema(
             trim: true,
             index: true,
         },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+            lowecase: true,
+            trim: true, 
+        },
         avatar: {
             type: String, //cloudinary URL
             required: true,
@@ -47,7 +54,7 @@ const userSchema = new mongoose.Schema(
 userSchema.pre("save", async function(next){
     if(!this.isModified("password")) return next();
 
-    this.password = bcrypt.hash(this.password, 10);
+    this.password = await bcrypt.hash(this.password, 10);
     next();
 })
 
@@ -84,4 +91,6 @@ userSchema.methods.generateRefreshToken = function(){
     )
 }
 
-export default User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+export default User;
